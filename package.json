@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-booilerplate-init-cli",
+  "version": "1.0.0",
+  "author": "merelu",
+  "license": "ISC",
+  "bin": {
+    "create-nest-package": "./nest-package.js",
+    "create-nest-monorepo": "./nest-monorepo.js"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^5.3.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
