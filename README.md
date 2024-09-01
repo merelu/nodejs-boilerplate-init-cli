@@ -2,7 +2,7 @@
 
 ## 사용방법
 
-1. package clone
+1. git clone
 2. 설치
 
 ```
