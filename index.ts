@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
 import { input, select } from "@inquirer/prompts";
 import { execSync } from "child_process";
@@ -7,6 +7,7 @@ import path from "path";
 
 async function main() {
   const boilerplateUrl = "https://github.com/merelu/ts-monorepo-template.git";
+
   const projectName = await input({
     message: "새 프로젝트의 이름을 입력하세요:",
     validate: (input: string) => {
@@ -19,7 +20,6 @@ async function main() {
       return true;
     },
   });
-
   const projectType = await select({
     message: "어떤 유형의 프로젝트를 생성하시겠습니까?",
     choices: [

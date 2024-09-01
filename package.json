@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "author": "merelu",
   "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node ./index.ts",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
   "bin": {
-    "create-nest-package": "./nest-package.js",
-    "create-nest-monorepo": "./nest-monorepo.js"
+    "create-project": "./dist/index.js"
   },
   "dependencies": {
     "@inquirer/prompts": "^5.3.8"

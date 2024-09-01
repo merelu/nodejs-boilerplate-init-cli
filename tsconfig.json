@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "ES2021",
+    "module": "CommonJS",
     "declaration": true,
     "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
     "strict": true,
     "sourceMap": true,
     "incremental": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "outDir": "./dist"
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
