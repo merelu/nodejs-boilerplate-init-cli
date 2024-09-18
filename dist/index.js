@@ -36,8 +36,8 @@ async function main() {
         const sparseOption = await (0, prompts_1.select)({
             message: "어떤 패키지를 선택하시겠습니까?",
             choices: [
-                { name: "Nest Package", value: "packages/nest" },
-                { name: "Common Package", value: "packages/common" },
+                { name: "Nest Package", value: "apps/api" },
+                { name: "Common Package", value: "libs/common" },
             ],
         });
         createPackage(projectName, boilerplateUrl, sparseOption);

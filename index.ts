@@ -34,8 +34,8 @@ async function main() {
     const sparseOption = await select({
       message: "어떤 패키지를 선택하시겠습니까?",
       choices: [
-        { name: "Nest Package", value: "packages/nest" },
-        { name: "Common Package", value: "packages/common" }, // 필요에 따라 다른 패키지 추가 가능
+        { name: "Nest Package", value: "apps/api" },
+        { name: "Common Package", value: "libs/common" }, // 필요에 따라 다른 패키지 추가 가능
       ],
     });
 
