@@ -34,7 +34,8 @@ async function main() {
     const sparseOption = await select({
       message: "어떤 패키지를 선택하시겠습니까?",
       choices: [
-        { name: "Nest Package", value: "apps/api" },
+        { name: "Nest Server Package", value: "apps/api" },
+        { name: "Nest Module Package", value: "libs/nest" },
         { name: "Common Package", value: "libs/common" }, // 필요에 따라 다른 패키지 추가 가능
       ],
     });
@@ -102,6 +103,59 @@ function createPackage(
   execSync("rm -rf .git", { stdio: "inherit" });
 
   console.log(`패키지 ${projectName}가 성공적으로 생성되었습니다.`);
+
+  //폴더의 package.json의 name을 projectName으로 변경
+  console.log(`package.json의 name을 ${projectName}으로 변경 중...`);
+  const packageJsonPath = path.join(process.cwd(), "package.json");
+
+  renamePackageJsonName(packageJsonPath, projectName);
+}
+
+function renamePackageJsonName(packageJsonPath: string, projectName: string) {
+  try {
+    const newName = `@${projectName}`;
+    fs.readFile(packageJsonPath, "utf8", (err, data) => {
+      if (err) {
+        if (err) {
+          console.error(
+            "package.json 파일을 읽는 도중 오류가 발생했습니다:",
+            err,
+          );
+        }
+      }
+
+      let packageJson;
+      try {
+        packageJson = JSON.parse(data);
+      } catch (parseError: unknown) {
+        console.error(
+          "package.json 파일을 파싱하는 도중 오류가 발생했습니다:",
+          parseError,
+        );
+      }
+
+      packageJson.name = newName;
+
+      fs.writeFile(
+        packageJsonPath,
+        JSON.stringify(packageJson, null, 2),
+        "utf8",
+        (writeErr) => {
+          if (writeErr) {
+            console.error(
+              "package.json 파일을 쓰는 도중 오류가 발생했습니다:",
+              writeErr,
+            );
+          }
+
+          console.log(`package.json의 name이 '${newName}'로 수정되었습니다.`);
+        },
+      );
+    });
+  } catch (e) {
+    console.error("package.json naem 변경 중 오류 발생", e);
+    return;
+  }
 }
 
 main();

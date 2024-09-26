@@ -36,7 +36,8 @@ async function main() {
         const sparseOption = await (0, prompts_1.select)({
             message: "어떤 패키지를 선택하시겠습니까?",
             choices: [
-                { name: "Nest Package", value: "apps/api" },
+                { name: "Nest Server Package", value: "apps/api" },
+                { name: "Nest Module Package", value: "libs/nest" },
                 { name: "Common Package", value: "libs/common" },
             ],
         });
@@ -73,6 +74,39 @@ function createPackage(projectName, boilerplateUrl, sparseFolder) {
     console.log(`프로젝트 생성 중: ${projectName}`);
     (0, child_process_1.execSync)("rm -rf .git", { stdio: "inherit" });
     console.log(`패키지 ${projectName}가 성공적으로 생성되었습니다.`);
+    console.log(`package.json의 name을 ${projectName}으로 변경 중...`);
+    const packageJsonPath = path_1.default.join(process.cwd(), "package.json");
+    renamePackageJsonName(packageJsonPath, projectName);
+}
+function renamePackageJsonName(packageJsonPath, projectName) {
+    try {
+        const newName = `@${projectName}`;
+        fs_1.default.readFile(packageJsonPath, "utf8", (err, data) => {
+            if (err) {
+                if (err) {
+                    console.error("package.json 파일을 읽는 도중 오류가 발생했습니다:", err);
+                }
+            }
+            let packageJson;
+            try {
+                packageJson = JSON.parse(data);
+            }
+            catch (parseError) {
+                console.error("package.json 파일을 파싱하는 도중 오류가 발생했습니다:", parseError);
+            }
+            packageJson.name = newName;
+            fs_1.default.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2), "utf8", (writeErr) => {
+                if (writeErr) {
+                    console.error("package.json 파일을 쓰는 도중 오류가 발생했습니다:", writeErr);
+                }
+                console.log(`package.json의 name이 '${newName}'로 수정되었습니다.`);
+            });
+        });
+    }
+    catch (e) {
+        console.error("package.json naem 변경 중 오류 발생", e);
+        return;
+    }
 }
 main();
 //# sourceMappingURL=index.js.map
